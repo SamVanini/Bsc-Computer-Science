@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="610.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LogInUtente">
+    <ToolBar prefHeight="47.0" prefWidth="780.0">
+        <Button id="accessoAdmin" mnemonicParsing="false" onAction="#accessoAdmin" text="Accesso responsabili" />
+    </ToolBar>
+    <Label layoutX="288.0" layoutY="150.0" text="VIAGGIA CON NOI">
+        <font>
+          <Font name="System Bold" size="22.0" />
+        </font>
+    </Label>
+     <Label fx:id="erroreAccesso" layoutX="320.0" layoutY="426.0" prefHeight="18.0" prefWidth="154.0" textAlignment="CENTER" textFill="#df0707" wrapText="true" />
+     <Label layoutX="241.0" layoutY="207.0" text="Mail" />
+     <Label layoutX="241.0" layoutY="245.0" text="Password" />
+     <TextField fx:id="username" layoutX="309.0" layoutY="203.0" promptText="E-Mail" />
+     <PasswordField fx:id="password" layoutX="309.0" layoutY="241.0" promptText="password" />
+    <Button id="accedi" layoutX="339.0" layoutY="279.0" mnemonicParsing="false" onAction="#accesso" prefHeight="22.0" prefWidth="89.0" text="Accedi" />
+     <Button id="iscrizione" layoutX="407.0" layoutY="335.0" mnemonicParsing="false" onAction="#creazioneNuovoAccount" opacity="0.95" prefHeight="34.0" prefWidth="70.0" text="Registrati" />
+     <Label layoutX="253.0" layoutY="343.0" prefHeight="18.0" prefWidth="134.0" text="Non sei ancora iscritto? " />
+</AnchorPane>

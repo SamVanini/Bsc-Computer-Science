@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ElencoCertificati">
+    <ToolBar prefHeight="40.0" prefWidth="780.0">
+        <Button id="LogOut" fx:id="exit" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
+        <Button id="Back" mnemonicParsing="false" onAction="#back" text="Indietro" />
+    </ToolBar>
+    <TableView fx:id="TabellaCert" layoutX="232.0" layoutY="135.0" prefHeight="439.0" prefWidth="316.0">
+      <columns>
+          <TableColumn fx:id="Vacanza" prefWidth="151.0" text="Vacanza" />
+          <TableColumn fx:id="Certificato" prefWidth="163.0" text="Certificato ottenuto" />
+      </columns>
+    </TableView>
+    <Label layoutX="324.0" layoutY="85.0" text="Elenco certificati ottenuti" />
+   <Button fx:id="siEsci" layoutX="8.0" layoutY="40.0" mnemonicParsing="false" onAction="#uscita" opacity="0.0" prefHeight="25.0" prefWidth="64.0" text="Si, esci" />
+   <Button fx:id="noResta" layoutX="8.0" layoutY="73.0" mnemonicParsing="false" onAction="#rimani" opacity="0.0" text="No, resta" />
+</AnchorPane>

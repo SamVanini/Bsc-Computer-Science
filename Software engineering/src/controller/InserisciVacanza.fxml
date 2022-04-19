@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InserisciVacanza">
+    <ToolBar prefHeight="40.0" prefWidth="780.0">
+        <Button id="LogOut" fx:id="exit" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
+        <Button id="Back" mnemonicParsing="false" onAction="#back" text="Annulla" />
+    </ToolBar>
+    <GridPane layoutX="128.0" layoutY="149.0" prefHeight="345.0" prefWidth="524.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <Label text="Destinazione" />
+        <Label text="Data di partenza" GridPane.rowIndex="1" />
+        <Label text="Numero settimane" GridPane.rowIndex="2" />
+        <Label text="Lingua studiata" GridPane.rowIndex="3" />
+        <Label text="Gita 1" GridPane.rowIndex="4" />
+        <Label text="Gita 2" GridPane.rowIndex="5" />
+        <Label text="Costo" GridPane.rowIndex="6" />
+        <TextField fx:id="Destinazione" GridPane.columnIndex="1" />
+        <TextField fx:id="DataPartenza" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField fx:id="NumeroSettimane" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <TextField fx:id="LinguaStudiata" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <TextField fx:id="Costo" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <ComboBox fx:id="Gita1" prefHeight="25.0" prefWidth="264.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <ComboBox fx:id="Gita2" prefHeight="25.0" prefWidth="268.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+    </GridPane>
+    <Button id="Conferma" layoutX="364.0" layoutY="515.0" mnemonicParsing="false" onAction="#submit" text="Conferma" />
+    <Label layoutX="292.0" layoutY="84.0" text="Inserimento nuova vacanza" />
+   <Label fx:id="errore" layoutX="288.0" layoutY="564.0" prefHeight="18.0" prefWidth="219.0" textFill="#e71616" />
+   <Button fx:id="siEsci" layoutY="40.0" mnemonicParsing="false" onAction="#uscita" opacity="0.0" prefHeight="25.0" prefWidth="72.0" text="Si, esci" />
+   <Button fx:id="noResta" layoutY="72.0" mnemonicParsing="false" onAction="#rimani" opacity="0.0" text="No, rimani" />
+</AnchorPane>

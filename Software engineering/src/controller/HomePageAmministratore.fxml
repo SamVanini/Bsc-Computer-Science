@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="610.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomePageAmministratore">
+    <ToolBar prefHeight="40.0" prefWidth="780.0">
+        <Button id="LogOut" fx:id="exit" mnemonicParsing="false" onAction="#logOut" text="Log out" />
+    </ToolBar>
+    <GridPane layoutX="209.0" layoutY="185.0" prefHeight="296.0" prefWidth="362.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="270.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="156.0" minWidth="10.0" prefWidth="56.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="65.0" minHeight="9.0" prefHeight="51.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <Button id="NuovaGita" mnemonicParsing="false" onAction="#nuovaGita" prefHeight="25.0" prefWidth="68.0" text="Inserisci" GridPane.columnIndex="1" />
+        <Button id="NuovaVacanza" mnemonicParsing="false" onAction="#nuovaVacanza" prefHeight="25.0" prefWidth="68.0" text="Inserisci" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Button id="VotoMedio" mnemonicParsing="false" onAction="#votoMedio" text="Visualizza" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Button id="Risultati" mnemonicParsing="false" onAction="#risultati" text="Visualizza" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label prefWidth="129.0" text="Inserisci una nuova gita" />
+        <Label text="Inserisci una nuova vacanza" GridPane.rowIndex="1" />
+        <Label text="Visualizza voto medio delle vacanze" GridPane.rowIndex="2" />
+        <Label text="Visualizza risultati questionari" GridPane.rowIndex="3" />
+      <Label text="Inserisci certificati ottenuti" GridPane.rowIndex="4" />
+      <Button mnemonicParsing="false" onAction="#inserisciCertificato" prefHeight="25.0" prefWidth="68.0" text="Inserisci" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+    </GridPane>
+    <Label layoutX="317.0" layoutY="127.0" text="Home page amministratore" />
+   <Button fx:id="siEsci" layoutY="40.0" mnemonicParsing="false" onAction="#uscita" opacity="0.0" prefHeight="25.0" prefWidth="64.0" text="Si, esci" />
+   <Button fx:id="noResta" layoutY="65.0" mnemonicParsing="false" onAction="#rimani" opacity="0.0" text="No, resta" />
+</AnchorPane>

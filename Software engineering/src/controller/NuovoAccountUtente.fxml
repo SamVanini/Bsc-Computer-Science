@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="610.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NuovoAccountUtente">
+    <ToolBar prefHeight="40.0" prefWidth="780.0">
+        <Button id="indietro" mnemonicParsing="false" onAction="#tornaIndietro" text="Annulla" />
+    </ToolBar>
+    <Button id="Conferma" layoutX="279.0" layoutY="542.0" mnemonicParsing="false" onAction="#creazioneAccount" prefHeight="26.0" prefWidth="197.0" text="Continua" />
+    <Label layoutX="313.0" layoutY="48.0" text="Crea nuovo profilo">
+      <font>
+         <Font name="Corbel" size="17.0" />
+      </font></Label>
+    <Label layoutX="163.0" layoutY="70.0" text="Dati ragazzo">
+      <font>
+         <Font size="14.0" />
+      </font></Label>
+    <Label layoutX="524.0" layoutY="70.0" text="Dati genitore">
+      <font>
+         <Font size="14.0" />
+      </font></Label>
+   <Label fx:id="Errore" layoutX="228.0" layoutY="577.0" prefHeight="18.0" prefWidth="298.0" textAlignment="CENTER" textFill="#df0707" wrapText="true" />
+     <TextField fx:id="Nome" layoutX="122.0" layoutY="106.0" promptText="Nome" />
+     <TextField fx:id="Cognome" layoutX="122.0" layoutY="139.0" promptText="Cognome" />
+     <TextField fx:id="Eta" layoutX="122.0" layoutY="171.0" promptText="Età" />
+     <TextField fx:id="Via" layoutX="122.0" layoutY="298.0" promptText="Via" />
+     <TextField fx:id="NumeroCivico" layoutX="122.0" layoutY="204.0" promptText="N° civico" />
+     <TextField fx:id="Citta" layoutX="122.0" layoutY="266.0" promptText="Città" />
+     <TextField fx:id="Telefono" layoutX="122.0" layoutY="235.0" promptText="N° telefono" />
+     <TextField fx:id="Mail" layoutX="122.0" layoutY="331.0" promptText="Mail" />
+     <TextField fx:id="Hobby" layoutX="122.0" layoutY="363.0" promptText="Hobby" />
+     <ComboBox fx:id="Allergia1" layoutX="122.0" layoutY="402.0" prefHeight="26.0" prefWidth="150.0" promptText="Allergia1" />
+     <ComboBox fx:id="Allergia2" layoutX="122.0" layoutY="437.0" prefHeight="26.0" prefWidth="150.0" promptText="Allergia2" />
+     <TextField fx:id="Password" layoutX="122.0" layoutY="476.0" promptText="Password" />
+     <TextField fx:id="NomeG" layoutX="484.0" layoutY="106.0" promptText="Nome" />
+     <TextField fx:id="CognomeG" layoutX="484.0" layoutY="139.0" promptText="Cognome" />
+     <TextField fx:id="TelefonoG" layoutX="484.0" layoutY="171.0" promptText="N° telefono" />
+     <TextField fx:id="MailG" layoutX="484.0" layoutY="204.0" promptText="Mail" />
+   <Label fx:id="errNome" layoutX="299.0" layoutY="110.0" prefHeight="18.0" prefWidth="100.0" textFill="#d71111" />
+   <Label fx:id="errCognome" layoutX="299.0" layoutY="143.0" prefWidth="100.0" textFill="#d71111" />
+   <Label fx:id="errEta" layoutX="299.0" layoutY="175.0" prefHeight="18.0" prefWidth="160.0" textFill="#d71111" />
+   <Label fx:id="errNumeroCivico" layoutX="299.0" layoutY="206.0" prefWidth="100.0" textFill="#d71111" />
+   <Label fx:id="errTelefono" layoutX="299.0" layoutY="239.0" prefWidth="100.0" textFill="#d71111" />
+   <Label fx:id="errCitta" layoutX="299.0" layoutY="271.0" prefWidth="100.0" textFill="#d71111" />
+   <Label fx:id="errVia" layoutX="299.0" layoutY="302.0" prefWidth="100.0" textFill="#d71111" />
+   <Label fx:id="errMail" layoutX="299.0" layoutY="335.0" prefWidth="100.0" textFill="#d71111" />
+   <Label fx:id="errPassword" layoutX="299.0" layoutY="446.0" prefHeight="88.0" prefWidth="142.0" textFill="#d71111">
+      <font>
+         <Font size="10.0" />
+      </font></Label>
+   <Label fx:id="errNomeG" layoutX="652.0" layoutY="110.0" prefWidth="100.0" textFill="#d71111" />
+   <Label fx:id="errCognomeG" layoutX="652.0" layoutY="143.0" prefWidth="100.0" textFill="#d71111" />
+   <Label fx:id="errTelefonoG" layoutX="652.0" layoutY="175.0" prefWidth="100.0" textFill="#d71111" />
+   <Label fx:id="errMailG" layoutX="652.0" layoutY="206.0" prefWidth="100.0" textFill="#d71111" />
+   <Label fx:id="errHobby" layoutX="299.0" layoutY="367.0" prefWidth="100.0" textFill="#d71111" />
+</AnchorPane>

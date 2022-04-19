@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RisposteQuestionari">
+    <ToolBar prefHeight="40.0" prefWidth="780.0">
+        <Button fx:id="exit" id="LogOut" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
+        <Button id="Back" mnemonicParsing="false" onAction="#back" text="Indietro" />
+    </ToolBar>
+    <TableView fx:id="Questionari" layoutX="3.0" layoutY="135.0" prefHeight="475.0" prefWidth="780.0">
+      <columns>
+          <TableColumn fx:id="Vacanza" prefWidth="151.0" text="Vacanza" />
+          <TableColumn fx:id="Voto" prefWidth="163.0" text="Voto" />
+          <TableColumn fx:id="Commento" prefWidth="465.0" text="Commento " />
+      </columns>
+    </TableView>
+    <Label layoutX="335.0" layoutY="85.0" text="Risposte questionari " />
+   <Button fx:id="siEsci" layoutX="3.0" layoutY="40.0" mnemonicParsing="false" onAction="#uscita" opacity="0.0" prefHeight="25.0" prefWidth="64.0" text="Si, esci" />
+   <Button fx:id="noResta" layoutX="3.0" layoutY="73.0" mnemonicParsing="false" onAction="#uscita" opacity="0.0" text="No, resta" />
+</AnchorPane>

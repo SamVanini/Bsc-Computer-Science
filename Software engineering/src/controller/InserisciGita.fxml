@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InserisciGita">
+   <children>
+      <ToolBar prefHeight="40.0" prefWidth="780.0">
+        <items>
+          <Button fx:id="exit" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
+            <Button id="Back" mnemonicParsing="false" onAction="#back" text="Annulla" />
+        </items>
+      </ToolBar>
+      <GridPane layoutX="140.0" layoutY="180.0" prefHeight="267.0" prefWidth="559.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="274.0" minWidth="10.0" prefWidth="167.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="409.0" minWidth="10.0" prefWidth="392.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="74.0" minHeight="9.0" prefHeight="37.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="193.0" minHeight="10.0" prefHeight="157.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Destinazione" />
+            <Label text="Costo" GridPane.rowIndex="1" />
+            <Label text="Numero Ore" GridPane.rowIndex="2" />
+            <Label text="Descrizione" GridPane.rowIndex="3" />
+            <TextField fx:id="Destinazione" GridPane.columnIndex="1" />
+            <TextField fx:id="Costo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="NumeroOre" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextArea fx:id="Descrizione" prefHeight="128.0" prefWidth="392.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+      <Label layoutX="358.0" layoutY="101.0" text="Inserimento nuova gita" />
+      <Button id="Conferma" layoutX="364.0" layoutY="476.0" mnemonicParsing="false" onAction="#submit" text="Inserisci" />
+      <Label fx:id="errore" layoutX="308.0" layoutY="532.0" prefHeight="18.0" prefWidth="169.0" textFill="#d91818" />
+      <Button fx:id="siEsci" layoutX="8.0" layoutY="40.0" mnemonicParsing="false" onAction="#uscita" opacity="0.0" prefHeight="25.0" prefWidth="64.0" text="Si, esci" />
+      <Button fx:id="noResta" layoutX="8.0" layoutY="76.0" mnemonicParsing="false" onAction="#rimani" opacity="0.0" text="No, resta" />
+   </children>
+</AnchorPane>

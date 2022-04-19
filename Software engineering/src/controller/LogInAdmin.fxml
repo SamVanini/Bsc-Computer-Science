@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="610.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LogInAdmin">
+   <children>
+      <ToolBar prefHeight="40.0" prefWidth="780.0">
+        <items>
+          <Button id="Back" fx:id="indietro" mnemonicParsing="false" onAction="#tornaIndietro" text="Indietro" />
+        </items>
+      </ToolBar>
+      <TextField id="Username" fx:id="username" layoutX="334.0" layoutY="199.0" promptText="username" />
+      <PasswordField id="Password" fx:id="password" layoutX="334.0" layoutY="240.0" prefHeight="25.0" prefWidth="149.0" promptText="password" />
+      <Button id="LogIn" fx:id="accesso" layoutX="324.0" layoutY="292.0" mnemonicParsing="false" onAction="#accessoAdmin" prefHeight="26.0" prefWidth="94.0" text="Accedi" />
+      <Label layoutX="286.0" layoutY="150.0" prefHeight="26.0" prefWidth="209.0" text="Benvenuto amministratore">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label id="Error" fx:id="erroreAccesso" layoutX="296.0" layoutY="347.0" prefHeight="18.0" prefWidth="150.0" textAlignment="CENTER" textFill="#ef0d0d" />
+      <Label layoutX="259.0" layoutY="203.0" text="Username" />
+      <Label layoutX="260.0" layoutY="244.0" text="Password" />
+   </children>
+</AnchorPane>

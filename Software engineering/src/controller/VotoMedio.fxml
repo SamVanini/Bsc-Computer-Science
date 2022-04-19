@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VotoMedio">
+    <ToolBar prefHeight="40.0" prefWidth="780.0">
+        <Button fx:id="exit" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
+        <Button mnemonicParsing="false" onAction="#back" text="Indietro" />
+    </ToolBar>
+    <TableView fx:id="VotoMedio" layoutX="244.0" layoutY="179.0" prefHeight="398.0" prefWidth="348.0">
+      <columns>
+          <TableColumn fx:id="Vacanza" prefWidth="174.0" text="Vacanza" />
+          <TableColumn fx:id="Voto" prefWidth="173.0" text="Voto medio" />
+      </columns>
+    </TableView>
+    <Label layoutX="364.0" layoutY="114.0" text="Voto medio vacanze" />
+   <Button fx:id="siEsci" layoutX="7.0" layoutY="40.0" mnemonicParsing="false" onAction="#uscita" opacity="0.0" prefHeight="25.0" prefWidth="64.0" text="Si, esci" />
+   <Button fx:id="noResta" layoutX="7.0" layoutY="72.0" mnemonicParsing="false" onAction="#rimani" opacity="0.0" text="No, resta" />
+</AnchorPane>
