@@ -1,0 +1,52 @@
+.model PARK_A
+.inputs Mem_A Op_A1 Op_A0 N_A4 N_A3 N_A2 N_A1 N_A0
+.outputs Posto_A P_A
+
+#importazione costanti
+.subckt uno5 O4=U4 O3=U3 O2=U2 O1=U1 O0=U0
+.subckt trentuno5 O4=TR4 O3=TR3 O2=TR2 O1=TR1 O0=TR0
+.names ZERO
+
+#MUX 5 bit per la selezione del valore da usare per il conteggio
+.subckt MUX2 S=Mem_A A=N_A4 B=LOAD4 O=SELECTED4
+.subckt MUX2 S=Mem_A A=N_A3 B=LOAD3 O=SELECTED3
+.subckt MUX2 S=Mem_A A=N_A2 B=LOAD2 O=SELECTED2
+.subckt MUX2 S=Mem_A A=N_A1 B=LOAD1 O=SELECTED1
+.subckt MUX2 S=Mem_A A=N_A0 B=LOAD0 O=SELECTED0
+
+#esecuzione somma 
+.subckt SOMMATORE A=SELECTED0 B=U0 CIN=ZERO O=ADD0 COUT=R1
+.subckt SOMMATORE A=SELECTED1 B=U1 CIN=R1 O=ADD1 COUT=R2
+.subckt SOMMATORE A=SELECTED2 B=U2 CIN=R2 O=ADD2 COUT=R3
+.subckt SOMMATORE A=SELECTED3 B=U3 CIN=R3 O=ADD3 COUT=R4
+.subckt SOMMATORE A=SELECTED4 B=U4 CIN=R4 O=ADD4 COUT=COUT
+
+#esecuzione sottrazione
+.subckt Sottrattore5 A4=SELECTED4 A3=SELECTED3 A2=SELECTED2 A1=SELECTED1 A0=SELECTED0 CIN=ZERO S4=SOTT4 S3=SOTT3 S2=SOTT2 S1=SOTT1 S0=SOTT0 COUT=C0UT1
+
+#selezione valore del registro
+.subckt MUX4 X1=Op_A1 X0=Op_A0 a4=SELECTED4 a3=SELECTED3 a2=SELECTED2 a1=SELECTED1 a0=SELECTED0 b4=ADD4 b3=ADD3 b2=ADD2 b1=ADD1 b0=ADD0 c4=SOTT4 c3=SOTT3 c2=SOTT2 c1=SOTT1 c0=SOTT0 d4=SELECTED4 d3=SELECTED3 d2=SELECTED2 d1=SELECTED1 d0=SELECTED0 o4=RES4 o3=RES3 o2=RES2 o1=RES1 o0=RES0
+
+#Comparatore 5 bit per confrontare il numero delle auto presenti con la capienza massima
+.subckt UGUALE5 A4=RES4 A3=RES3 A2=RES2 A1=RES1 A0=RES0 B4=TR4 B3=TR3 B2=TR2 B1=TR1 B0=TR0 O=P_A
+
+#caricamento valore nel registro
+.subckt Registro5 A4=RES4  A3=RES3  A2=RES2  A1=RES1  A0=RES0  O4=LOAD4  O3=LOAD3  O2=LOAD2  O1=LOAD1  O0=LOAD0
+
+#salvataggio valore di Posto_A
+.subckt REGISTRO A=P_A O=Posto_A
+
+#ricerca costanti
+.search uno5.blif
+.search trentuno5.blif
+
+#ricerca componenti
+.search Mux2.blif
+.search Mux4.blif
+.search Uguale5.blif
+.search Sommatore.blif
+.search Sottrattore5.blif
+.search Registro5.blif
+.search Registro1.blif
+
+.end

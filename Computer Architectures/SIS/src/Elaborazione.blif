@@ -1,0 +1,197 @@
+.model DATAPATH
+.inputs N_A4 N_A3 N_A2 N_A1 N_A0 MEM_A MEM_B MEM_C OP_A1 OP_A0 OP_B1 OP_B0 \
+OP_C1 OP_C0
+.outputs POSTO_A POSTO_B POSTO_C P_A P_B P_C
+.latch    P_A POSTO_A re NIL 0
+.latch    RES4 LOAD4 re NIL 0
+.latch    RES3 LOAD3 re NIL 0
+.latch    RES2 LOAD2 re NIL 0
+.latch    RES1 LOAD1 re NIL 0
+.latch    RES0 LOAD0 re NIL 0
+.latch    P_B POSTO_B re NIL 0
+.latch    [6371] [6331] re NIL 0
+.latch    [6372] [6333] re NIL 0
+.latch    [6373] [6335] re NIL 0
+.latch    [6374] [6337] re NIL 0
+.latch    [6375] [6339] re NIL 0
+.latch    P_C POSTO_C re NIL 0
+.latch    [6461] [6410] re NIL 0
+.latch    [6462] [6412] re NIL 0
+.latch    [6463] [6414] re NIL 0
+.latch    [6464] [6416] re NIL 0
+.latch    [6465] [6418] re NIL 0
+.names RES4 RES3 RES2 RES1 RES0 P_A
+11111 1
+.names [6371] [6372] [6373] [6374] [6375] P_B
+11111 1
+.names [6461] [6462] [6465] P_C
+110 1
+.names SELECTED4 SELECTED3 SELECTED2 RES3 RES2 RES4
+10-0- 1
+11--1 1
+1--10 1
+0110- 1
+00-11 1
+.names OP_A1 OP_A0 SELECTED3 SELECTED2 RES2 RES3
+1-11- 1
+0-1-1 1
+--100 1
+-0001 1
+-1010 1
+.names OP_A0 SELECTED2 R2 C1 [6503] [6569] RES2
+-1--1- 1
+110--- 1
+01-1-- 1
+-0--01 1
+.names OP_A1 OP_A0 SELECTED0 R2 C1 RES0 RES1
+-0-1-- 1
+---1-1 1
+-10-1- 1
+-0--01 1
+0--010 1
+.names SELECTED0 [6503] RES0
+11 1
+00 1
+.names [6330] [6332] [6334] [6372] [6373] [6371]
+10-0- 1
+11--1 1
+1--10 1
+0110- 1
+00-11 1
+.names OP_B0 [6373] [6332] [6507] [6570] [6372]
+--11- 1
+111-- 1
+001-- 1
+--001 1
+.names [6334] [6507] [6373]
+11 1
+00 1
+.names OP_B1 OP_B0 [6338] [6375] [6489] [6502] [6509] [6374]
+---10-- 1
+----1-0 1
+0--01-- 1
+-10--1- 1
+.names [6338] [6488] [6375]
+11 1
+00 1
+.names [6425] [6426] [6462] [6463] [6465] [6508] [6461]
+1-0--- 1
+1--0-- 1
+-1-0-0 1
+001-1- 1
+.names [6426] [6427] [6463] [6508] [6512] [6462]
+111-- 1
+0-00- 1
+1--11 1
+00--0 1
+.names OP_C1 OP_C0 [6427] [6428] [6429] [6464] [6465] [6504] [6508] [6513] \
+[6463]
+-011------ 1
+1-1-1----- 1
+--0--0-0-- 1
+--1-----11 1
+--00-11--- 1
+.names OP_C1 OP_C0 [6428] [6429] [6465] [6504] [6505] [6513] [6464]
+-----01- 1
+-01-0--- 1
+--1--1-1 1
+--0-1--0 1
+0-01--0- 1
+.names [6429] [6505] [6465]
+11 1
+00 1
+.names MEM_A N_A4 LOAD4 SELECTED4
+11- 1
+0-1 1
+.names MEM_A N_A3 LOAD3 SELECTED3
+11- 1
+0-1 1
+.names MEM_A N_A2 LOAD2 SELECTED2
+11- 1
+0-1 1
+.names MEM_A N_A0 LOAD0 SELECTED0
+11- 1
+0-1 1
+.names N_A1 MEM_A LOAD1 [6506]
+11- 1
+-01 1
+.names SELECTED0 [6506] R2
+11 1
+.names SELECTED0 [6506] C1
+1- 1
+-1 1
+.names OP_A1 OP_A0 [6503]
+11 1
+00 1
+.names MEM_B N_A4 [6331] [6330]
+11- 1
+0-1 1
+.names MEM_B N_A3 [6333] [6332]
+11- 1
+0-1 1
+.names MEM_B N_A2 [6335] [6334]
+11- 1
+0-1 1
+.names MEM_B N_A0 [6339] [6338]
+11- 1
+0-1 1
+.names [6488] [6489] [6507]
+1- 1
+-1 1
+.names OP_B0 [6338] [6502] [6509] [6489]
+01-- 1
+0-1- 1
+1--1 1
+.names N_A1 MEM_B [6337] [6502]
+11- 1
+-01 1
+.names [6338] [6502] [6509]
+0- 1
+-0 1
+.names OP_B1 OP_B0 [6488]
+11 1
+00 1
+.names N_A4 MEM_C [6410] [6425]
+11- 1
+-01 1
+.names N_A3 MEM_C [6412] [6426]
+11- 1
+-01 1
+.names MEM_C [6501] [6510]
+11 1
+.names MEM_C [6501] [6511]
+01 1
+.names N_A2 [6414] [6510] [6511] [6427]
+1-1- 1
+-1-1 1
+.names N_A1 [6416] [6510] [6511] [6428]
+1-1- 1
+-1-1 1
+.names N_A0 [6418] [6510] [6511] [6429]
+1-1- 1
+-1-1 1
+.names [6427] [6504] [6508]
+0- 1
+-1 1
+.names [6463] [6465] [6512]
+0- 1
+-0 1
+.names [6428] [6429] [6504]
+0- 1
+-0 1
+.names OP_C1 OP_C0 [6513]
+0- 1
+-1 1
+.names OP_C1 OP_C0 [6513] [6505]
+1-1 1
+-01 1
+.names [6425] [6426] [6501]
+0- 1
+-0 1
+.names OP_A1 R2 C1 [6569]
+1-0 1
+01- 1
+.names OP_B0 [6373] [6334] [6570]
+1-1 1
+01- 1
+.end

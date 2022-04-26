@@ -1,0 +1,21 @@
+.model MAGGIORE
+.inputs A4 A3 A2 A1 A0 B4 B3 B2 B1 B0
+.outputs AmagB
+
+.subckt XOR_GATE IN1=A4 IN2=B4 OUT=X4
+.subckt XOR_GATE IN1=A3 IN2=B3 OUT=X3
+.subckt XOR_GATE IN1=A2 IN2=B2 OUT=X2
+.subckt XOR_GATE IN1=A1 IN2=B1 OUT=X1
+.subckt XOR_GATE IN1=A0 IN2=B0 OUT=X0
+
+.names A4 A3 A2 A1 A0 X4 X3 X2 X1 X0 AmagB
+
+1----1---- 1
+-1---01--- 1
+--1--001-- 1
+---1-0001- 1
+----100001 1
+
+.search XOR.blif
+
+.end

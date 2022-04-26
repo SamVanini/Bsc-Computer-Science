@@ -1,0 +1,12 @@
+fun f(x) {
+    out( { 333 + 333 } nd { 42 * 42 } );
+    return x
+}
+
+out(f(42))
+
+/* Output:
+ *
+ * "Error....ecc...."  
+ *
+ */

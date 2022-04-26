@@ -1,0 +1,15 @@
+fun f(x){ 
+    y.g = 42 + 0;
+    return y.g
+}
+
+global y = 42;
+f(42);
+out(y.g)
+
+
+/* Output:
+ *
+ * "Error....ecc...."  
+ *
+ */

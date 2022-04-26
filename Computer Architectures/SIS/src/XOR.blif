@@ -1,0 +1,7 @@
+.model XOR_GATE
+.inputs IN1 IN2
+.outputs OUT
+.names IN1 IN2 OUT
+00 0
+11 0
+.end

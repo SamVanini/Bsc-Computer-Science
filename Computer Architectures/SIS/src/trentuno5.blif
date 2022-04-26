@@ -1,0 +1,10 @@
+.model trentuno5
+.outputs O4 O3 O2 O1 O0
+.subckt uno1 uscita=O4
+.subckt uno1 uscita=O3
+.subckt uno1 uscita=O2
+.subckt uno1 uscita=O1
+.subckt uno1 uscita=O0
+
+.search uno1.blif
+.end

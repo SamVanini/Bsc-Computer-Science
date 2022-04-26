@@ -1,0 +1,202 @@
+.model FSM
+.inputs IN OUT SECTOR_A SECTOR_B SECTOR_C Posto_A Posto_B Posto_C
+.outputs SBARRA_IN SBARRA_OUT MEM_A MEM_B MEM_C OP_A1 OP_A0 OP_B1 OP_B0 OP_C1 \
+OP_C0
+.latch    [30] LatchOut_v8   1
+.latch    [31] LatchOut_v9   1
+.latch    [32] LatchOut_v10   0
+.start_kiss
+.i 8
+.o 11
+.p 28
+.s 5
+.r RESET
+0------- RESET RESET 11---------
+-0------ RESET RESET 11---------
+--0----- RESET RESET 11---------
+---0---- RESET RESET 11---------
+----0--- RESET RESET 11---------
+11111--- RESET INS_A 00000000000
+-------- INS_A INS_B 00100000000
+-------- INS_B INS_C 00010000000
+-------- INS_C AUTO 00001000000
+011000-- AUTO AUTO 10000010000
+01010-0- AUTO AUTO 10000000100
+01001--0 AUTO AUTO 10000000001
+011001-- AUTO AUTO 00000000000
+01010-1- AUTO AUTO 00000000000
+01001--1 AUTO AUTO 00000000000
+10100--- AUTO AUTO 01000100000
+10010--- AUTO AUTO 01000001000
+10001--- AUTO AUTO 01000000010
+11------ AUTO AUTO 00000000000
+--11---- AUTO AUTO 00000000000
+--1-1--- AUTO AUTO 00000000000
+---11--- AUTO AUTO 00000000000
+001----- AUTO AUTO 00000000000
+00-1---- AUTO AUTO 00000000000
+00--1--- AUTO AUTO 00000000000
+1-000--- AUTO AUTO 00000000000
+-1000--- AUTO AUTO 00000000000
+00000--- AUTO RESET 11000000000
+.end_kiss
+.latch_order LatchOut_v8 LatchOut_v9 LatchOut_v10
+.code RESET 110
+.code INS_A 000
+.code INS_B 011
+.code INS_C 001
+.code AUTO 100
+.names SECTOR_C LatchOut_v9 [32] MEM_A [60] [61] [30]
+0-0--- 1
+-0-0-- 1
+--0-1- 1
+--0--1 1
+.names LatchOut_v9 [30] MEM_A [58] [62] [63] [31]
+--1--- 1
+11---- 1
+---111 1
+.names MEM_A MEM_B [32]
+1- 1
+-1 1
+.names [31] SBARRA_OUT OP_A0 OP_B0 OP_C0 SBARRA_IN
+--1-- 1
+---1- 1
+----1 1
+11--- 1
+.names LatchOut_v8 [31] OP_A1 OP_B1 OP_C1 SBARRA_OUT
+--1-- 1
+---1- 1
+----1 1
+11--- 1
+.names LatchOut_v8 LatchOut_v10 MEM_A
+00 1
+.names LatchOut_v9 LatchOut_v10 MEM_B
+11 1
+.names LatchOut_v9 LatchOut_v10 MEM_C
+01 1
+.names [58] [60] [63] OP_A1
+101 1
+.names IN OUT SECTOR_A SECTOR_C Posto_A [58] OP_A0
+011001 1
+.names IN SECTOR_A SECTOR_B LatchOut_v8 [63] OP_B1
+10111 1
+.names SECTOR_C Posto_B LatchOut_v8 [61] [62] OP_B0
+00101 1
+.names IN OUT SECTOR_A SECTOR_C [58] OP_C1
+10011 1
+.names OUT SECTOR_C Posto_C [58] [62] OP_C0
+11011 1
+.names SECTOR_B LatchOut_v8 [58]
+01 1
+.names IN SECTOR_A [60]
+0- 1
+-0 1
+.names OUT SECTOR_B [61]
+0- 1
+-0 1
+.names IN SECTOR_A [62]
+00 1
+.names OUT SECTOR_C [63]
+00 1
+.exdc 
+.inputs IN OUT SECTOR_A SECTOR_B SECTOR_C Posto_A Posto_B Posto_C LatchOut_v8 \
+LatchOut_v9 LatchOut_v10
+.outputs [30] [31] [32] SBARRA_IN SBARRA_OUT MEM_A MEM_B MEM_C OP_A1 OP_A0 \
+OP_B1 OP_B0 OP_C1 OP_C0
+.names LatchOut_v8 LatchOut_v9 LatchOut_v10 [30]
+1-1 1
+010 1
+.names LatchOut_v8 LatchOut_v9 LatchOut_v10 [31]
+1-1 1
+010 1
+.names LatchOut_v8 LatchOut_v9 LatchOut_v10 [32]
+1-1 1
+010 1
+.names LatchOut_v8 LatchOut_v9 LatchOut_v10 SBARRA_IN
+1-1 1
+010 1
+.names LatchOut_v8 LatchOut_v9 LatchOut_v10 SBARRA_OUT
+1-1 1
+010 1
+.names IN OUT SECTOR_A SECTOR_B SECTOR_C LatchOut_v8 LatchOut_v9 LatchOut_v10 \
+MEM_A
+-----1-1 1
+0----11- 1
+-0---11- 1
+--0--11- 1
+---0-11- 1
+----011- 1
+-----010 1
+.names IN OUT SECTOR_A SECTOR_B SECTOR_C LatchOut_v8 LatchOut_v9 LatchOut_v10 \
+MEM_B
+-----1-1 1
+0----11- 1
+-0---11- 1
+--0--11- 1
+---0-11- 1
+----011- 1
+-----010 1
+.names IN OUT SECTOR_A SECTOR_B SECTOR_C LatchOut_v8 LatchOut_v9 LatchOut_v10 \
+MEM_C
+-----1-1 1
+0----11- 1
+-0---11- 1
+--0--11- 1
+---0-11- 1
+----011- 1
+-----010 1
+.names IN OUT SECTOR_A SECTOR_B SECTOR_C LatchOut_v8 LatchOut_v9 LatchOut_v10 \
+OP_A1
+-----1-1 1
+0----11- 1
+-0---11- 1
+--0--11- 1
+---0-11- 1
+----011- 1
+-----010 1
+.names IN OUT SECTOR_A SECTOR_B SECTOR_C LatchOut_v8 LatchOut_v9 LatchOut_v10 \
+OP_A0
+-----1-1 1
+0----11- 1
+-0---11- 1
+--0--11- 1
+---0-11- 1
+----011- 1
+-----010 1
+.names IN OUT SECTOR_A SECTOR_B SECTOR_C LatchOut_v8 LatchOut_v9 LatchOut_v10 \
+OP_B1
+-----1-1 1
+0----11- 1
+-0---11- 1
+--0--11- 1
+---0-11- 1
+----011- 1
+-----010 1
+.names IN OUT SECTOR_A SECTOR_B SECTOR_C LatchOut_v8 LatchOut_v9 LatchOut_v10 \
+OP_B0
+-----1-1 1
+0----11- 1
+-0---11- 1
+--0--11- 1
+---0-11- 1
+----011- 1
+-----010 1
+.names IN OUT SECTOR_A SECTOR_B SECTOR_C LatchOut_v8 LatchOut_v9 LatchOut_v10 \
+OP_C1
+-----1-1 1
+0----11- 1
+-0---11- 1
+--0--11- 1
+---0-11- 1
+----011- 1
+-----010 1
+.names IN OUT SECTOR_A SECTOR_B SECTOR_C LatchOut_v8 LatchOut_v9 LatchOut_v10 \
+OP_C0
+-----1-1 1
+0----11- 1
+-0---11- 1
+--0--11- 1
+---0-11- 1
+----011- 1
+-----010 1
+.end

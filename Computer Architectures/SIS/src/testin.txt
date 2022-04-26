@@ -1,0 +1,17 @@
+sim 0 1 0 1 1	# macchina spenta
+sim 1 1 1 1 0
+sim 1 1 1 1 1	# accensione del sistema
+sim 1 0 1 1 1	# 23 posti occupati nel settore A
+sim 1 1 1 0 1	# 29 posti occupati nel settore B
+sim 1 1 1 0 0	# >24 posti occupati nel settore C
+sim 0 1 1 0 0	# ingresso nel settore A
+sim 1 0 0 1 0	# uscita dal settore B
+sim 1 0 0 0 1	# uscita dal settore C
+sim 0 1 0 0 1	# ingresso nel settore C
+sim 1 0 1 1 0	# errore di codifica di settore
+sim 0 1 0 0 1	# tentato ingresso nel settore C (gia' pieno)
+sim 0 1 0 1 0	# ingresso nel settore B
+sim 0 1 0 1 0	# ingresso nel settore B
+sim 0 1 0 1 0	# ingresso nel settore B
+sim 0 1 0 1 0	# ingresso nel settore B
+

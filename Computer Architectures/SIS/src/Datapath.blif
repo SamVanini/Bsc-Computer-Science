@@ -1,0 +1,16 @@
+.model DATAPATH
+.inputs N_A4 N_A3 N_A2 N_A1 N_A0 MEM_A MEM_B MEM_C OP_A1 OP_A0 OP_B1 OP_B0 OP_C1 OP_C0
+.outputs POSTO_A POSTO_B POSTO_C P_A P_B P_C
+
+#collegamento moduli dei singoli parcheggi
+.subckt PARK_A Mem_A=MEM_A Op_A1=OP_A1 Op_A0=OP_A0 Posto_A=POSTO_A N_A4=N_A4 N_A3=N_A3 N_A2=N_A2 N_A1=N_A1 N_A0=N_A0 P_A=P_A
+
+.subckt PARK_B Mem_B=MEM_B Op_B1=OP_B1 Op_B0=OP_B0 Posto_B=POSTO_B N_A4=N_A4 N_A3=N_A3 N_A2=N_A2 N_A1=N_A1 N_A0=N_A0 P_B=P_B
+
+.subckt PARK_C Mem_C=MEM_C Op_C1=OP_C1 Op_C0=OP_C0 Posto_C=POSTO_C N_A4=N_A4 N_A3=N_A3 N_A2=N_A2 N_A1=N_A1 N_A0=N_A0 P_C=P_C
+
+.search Park_A.blif
+.search Park_B.blif
+.search Park_C.blif
+
+.end

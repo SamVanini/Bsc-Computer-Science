@@ -1,0 +1,13 @@
+fun f(x) {
+  out(g * 42);
+  return x + 42
+}
+
+g = 3;
+out(f(g))
+
+/* Output:
+ *
+ * "Error....ecc...."  
+ *
+ */
