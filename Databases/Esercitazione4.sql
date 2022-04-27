@@ -82,3 +82,26 @@ WHERE
     AND IE.hamoduli <> '0'
 GROUP BY CS.nome
 ORDER BY CS.nome;
+
+-- Esercizio 5
+SELECT DISTINCT nomeins
+FROM Insegn AS I JOIN InsErogato AS IE ON (IE.id_insegn = I.id) JOIN CorsoStudi AS CS ON (IE.id_corsostudi = CS.id)
+WHERE CS.id = 4 AND I.id NOT IN
+    ( SELECT I.id
+      FROM Insegn AS I JOIN InsErogato AS IE ON (IE.id_insegn = I.id) JOIN CorsoStudi AS CS ON (IE.id_corsostudi = CS.id) JOIN InsInPeriodo AS IIP ON (IIP.id_inserogato = IE.id) JOIN PeriodoLez AS PL ON (IIP.id_periodolez = PL.id)
+      WHERE CS.id = 4 AND PL.abbreviazione LIKE '2%'
+);
+
+-- Esercizio 6
+SELECT CS.nome
+FROM CorsoStudi AS CS 
+WHERE ROW(CS.id) NOT IN(
+    SELECT DISTINCT IE.id_corsostudi
+    FROM Insegn AS I JOIN InsErogato AS IE ON (I.id = IE.id_insegn)
+    WHERE I.nomeins ILIKE '%matematica%'
+) 
+
+-- Esercizio 7
+SELECT SS.nomestruttura, SS.fax, COUNT(CS.id) AS CorsiServiti
+FROM CorsoStudi AS CS JOIN StrutturaServizio AS SS ON (CS.id_segreteria = SS.id)
+GROUP BY SS.nomestruttura, SS.fax
