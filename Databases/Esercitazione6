@@ -4,7 +4,7 @@ FROM CorsoStudi AS CS
 WHERE CS.nome ILIKE '%informatica')
 
 -- Con indice
-CREATE INDEX CS_nome_index ON CorsoStudi(nome);
+CREATE INDEX CS_nome_index ON CorsoStudi(nome varchar_pattern_ops);
 ANALYZE CorsoStudi
 EXPLAIN(SELECT CS.nome
 FROM CorsoStudi AS CS
@@ -27,6 +27,24 @@ SELECT I.nomeins, IE.id_facolta
 FROM InsErogato AS IE JOIN Insegn AS I ON IE.id_insegn = I.id
 WHERE IE.annoaccademico = '2013/2014'
 
+-- Con indice
 CREATE INDEX IE_id_insegn ON InsErogato(id_insegn) 
 CREATE INDEX IE_annoaccademico ON InsErogato USING hash(annoaccademico) 
 ANALYZE InsErogato
+
+-- Esercizio 4
+EXPLAIN
+SELECT CS.nome, CS.codice, CS.abbreviazione
+FROM CorsoStudi AS CS
+WHERE CS.nome ILIKE '%lingue%'
+
+-- Con indice
+-- Non usa l'indice anche se è già definito dal punto
+
+-- Esercizio 5
+EXPLAIN
+SELECT
+FROM
+WHERE
+
+-- Con indice
