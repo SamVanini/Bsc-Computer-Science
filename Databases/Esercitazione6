@@ -1,0 +1,32 @@
+-- Esercizio 1
+EXPLAIN(SELECT CS.nome
+FROM CorsoStudi AS CS
+WHERE CS.nome ILIKE '%informatica')
+
+-- Con indice
+CREATE INDEX CS_nome_index ON CorsoStudi(nome);
+ANALYZE CorsoStudi
+EXPLAIN(SELECT CS.nome
+FROM CorsoStudi AS CS
+WHERE CS.nome ILIKE '%informatica')
+
+-- Risposta: non cambia nulla, non si può utilizzare l'indice
+
+-- Esercizio 2
+EXPLAIN(SELECT I.nomeins
+FROM Insegn AS I
+WHERE I.nomeins LIKE 'Teoria%')
+
+-- Con indice
+CREATE INDEX I_nomeins ON Insegn(nomeins varchar_pattern_ops);
+ANALYZE Insegn;
+
+-- Esercizio 3
+EXPLAIN
+SELECT I.nomeins, IE.id_facolta
+FROM InsErogato AS IE JOIN Insegn AS I ON IE.id_insegn = I.id
+WHERE IE.annoaccademico = '2013/2014'
+
+CREATE INDEX IE_id_insegn ON InsErogato(id_insegn) 
+CREATE INDEX IE_annoaccademico ON InsErogato USING hash(annoaccademico) 
+ANALYZE InsErogato
