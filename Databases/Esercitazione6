@@ -8,6 +8,7 @@ CREATE INDEX CS_nome_index ON CorsoStudi(nome varchar_pattern_ops);
 ANALYZE CorsoStudi;
 
 -- Risposta: non cambia nulla, non si può utilizzare l'indice
+DROP INDEX CS_nome_index
 
 -- Esercizio 2
 EXPLAIN(SELECT I.nomeins
@@ -19,6 +20,7 @@ CREATE INDEX I_nomeins ON Insegn(nomeins varchar_pattern_ops);
 ANALYZE Insegn;
 
 -- Risposta: si passa dai 198 accessi ai 47
+DROP INDEX I_nomeins
 
 -- Esercizio 3
 EXPLAIN
@@ -32,6 +34,8 @@ CREATE INDEX IE_annoaccademico ON InsErogato USING hash(annoaccademico);
 ANALYZE InsErogato;
 
 -- Risposta: si passa dai 6320 accessi ai 3981
+DROP INDEX IE_id_insegn
+DROP INDEX IE_annoaccademico
 
 -- Esercizio 4
 EXPLAIN
@@ -40,7 +44,7 @@ FROM CorsoStudi AS CS
 WHERE CS.nome ILIKE '%lingue%'
 
 -- Con indice
--- Non usa l'indice anche se è già definito dal punto 1
+-- Non usa l'indice anche se è già definito dal punto 1, a causa della condizione
 
 -- Esercizio 5
 EXPLAIN
@@ -49,12 +53,15 @@ FROM InsErogato AS IE
 WHERE IE.modulo > 0 AND IE.annoaccademico = '2010/2011' AND IE.id_facolta = 7
 
 -- Con indice
-CREATE INDEX IE_annoaccademico ON InsErogato USING hash(annoaccademico); 
+CREATE INDEX IE_annoaccademico ON InsErogato(annoaccademico varchar_pattern_ops); 
 CREATE INDEX IE_id_facolta ON InsErogato(id_facolta);
 CREATE INDEX IE_modulo ON InsErogato(modulo);
 ANALYZE InsErogato;
 
--- Risposta: si passa dai 6310 accessi ai 1477
+-- Risposta: si passa dai 6310 accessi ai 1460
+DROP INDEX IE_annoaccademico
+DROP INDEX IE_id_facolta
+DROP INDEX IE_modulo
 
 -- Esercizio 6
 EXPLAIN
@@ -63,12 +70,13 @@ FROM Discriminante AS D JOIN InsErogato AS IE ON D.id = IE.id_discriminante JOIN
 WHERE IE.annoaccademico = '2009/2010' AND IE.crediti IN (3, 5, 12) AND IE.modulo <= 0
 
 -- Con indice
-CREATE INDEX IE_annoaccademico ON InsErogato(annoaccademico varchar_pattern_ops);
+CREATE INDEX IE_annoaccademico_modulo ON InsErogato(annoaccademico varchar_pattern_ops, modulo);
 CREATE INDEX IE_crediti ON InsErogato USING hash(crediti);
 ANALYZE InsErogato;
 
-
--- Risposta: si passa da 6701 accessi a
+-- Risposta: si passa da 6701 accessi a 1677
+DROP INDEX IE_annoaccademico_modulo
+DROP INDEX IE_crediti
 
 -- Esercizio 7
 EXPLAIN
@@ -77,8 +85,11 @@ FROM Discriminante AS D JOIN InsErogato AS IE ON D.id = IE.id_discriminante JOIN
 WHERE IE.annoaccademico = '2009/2010' AND IE.modulo <= 0 AND IE.crediti > 9
 
 -- Con indice
+CREATE INDEX IE_annoaccademico_modulo_crediti ON InsErogato (annoaccademico varchar_pattern_ops, modulo, crediti);
+ANALYZE InsErogato;
 
--- Risposta: si passa da 6604 accessi a 
+-- Risposta: si passa da 6604 accessi a 937
+DROP INDEX IE_annoaccademico_modulo_crediti
 
 -- Esercizio 8
 EXPLAIN
@@ -88,8 +99,23 @@ WHERE IE.annoaccademico = '2013/2014' AND IE.modulo = 0 AND CS.nome LIKE 'Laurea
 ORDER BY I.nomeins, D.descrizione, IE.crediti, IE.annierogazione
 
 -- Con indice
+CREATE INDEX IE_annoaccademico_modulo ON InsErogato(annoaccademico varchar_pattern_ops, modulo);
+CREATE INDEX CS_id ON CorsoStudi(id);
+CREATE INDEX D_id ON Discriminante(id);
+CREATE INDEX I_id ON Insegn(id);
+CREATE INDEX CS_nome ON CorsoStudi (nome varchar_pattern_ops);
+ANALYZE InsErogato;
+ANALYZE CorsoStudi;
+ANALYZE Discriminante;
+ANALYZE Insegn
 
--- Risposta: si passa da 6399 accessi a 
+-- Risposta: si passa da 6494 accessi a 2907
+DROP INDEX IE_annoaccademico_modulo;
+DROP INDEX CS_nome;
+DROP INDEX CS_id;
+DROP INDEX D_id;
+DROP INDEX I_id;
+
 
 -- Esercizio 9
 EXPLAIN
@@ -98,8 +124,11 @@ FROM InsErogato AS IE
 WHERE IE.annoaccademico = '2013/2014'
 
 -- Con indice
+CREATE INDEX IE_annoaccademico ON InsErogato (annoaccademico varchar_pattern_ops);
+ANALYZE InsErogato;
 
--- Risposta: si passa da 5983 accessi a 
+-- Risposta: si passa da 5983 accessi a 3632
+DROP INDEX IE_annoaccademico;
 
 -- Esercizio 10
 EXPLAIN
@@ -109,23 +138,25 @@ WHERE IE.modulo = 0
 GROUP BY IE.annoaccademico
 
 -- Con indice
+-- NON funzionano anno accademico e modulo (anche se il costo maggiore deriva dalla scan seq di ie)
 
 -- Risposta: si passa da 6315 accessi a 
 
 -- Esercizio 11
 EXPLAIN
 SELECT CS.nome
-FROM InsErogato AS IE JOIN Insegn AS I ON I.ID = IE.id_insegn JOIN CorsoStudi AS CS ON CS.id = IE.id_corsostudi
+FROM InsErogato AS IE JOIN Insegn AS I ON I.id = IE.id_insegn JOIN CorsoStudi AS CS ON CS.id = IE.id_corsostudi
 
 EXCEPT 
 
 SELECT CS.nome
-FROM InsErogato AS IE JOIN Insegn AS I ON I.ID = IE.id_insegn JOIN CorsoStudi AS CS ON CS.id = IE.id_corsostudi
+FROM InsErogato AS IE JOIN Insegn AS I ON I.id = IE.id_insegn JOIN CorsoStudi AS CS ON CS.id = IE.id_corsostudi
 WHERE I.nomeins ILIKE '%matematica%'
 
 -- Con indici
 
 -- Risposta: si passa da 9860 accessi a
+-- Indice inutilizzabile su ILIKE dato che il controllo è sulla parte centrale della stringa
 
 -- Esercizio 12
 EXPLAIN
