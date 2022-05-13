@@ -104,18 +104,20 @@ CREATE INDEX CS_id ON CorsoStudi(id);
 CREATE INDEX D_id ON Discriminante(id);
 CREATE INDEX I_id ON Insegn(id);
 CREATE INDEX CS_nome ON CorsoStudi (nome varchar_pattern_ops);
+CREATE INDEX IE_id_insegn_cs ON InsErogato(id_insegn, id_corsostudi);
 ANALYZE InsErogato;
 ANALYZE CorsoStudi;
 ANALYZE Discriminante;
 ANALYZE Insegn
 
--- Risposta: si passa da 6494 accessi a 2907
+-- Risposta: si passa da 6494 accessi a 782
+
 DROP INDEX IE_annoaccademico_modulo;
 DROP INDEX CS_nome;
 DROP INDEX CS_id;
 DROP INDEX D_id;
 DROP INDEX I_id;
-
+DROP INDEX IE_id_insegn_cs;
 
 -- Esercizio 9
 EXPLAIN
@@ -139,6 +141,10 @@ GROUP BY IE.annoaccademico
 
 -- Con indice
 -- NON funzionano anno accademico e modulo (anche se il costo maggiore deriva dalla scan seq di ie)
+DROP INDEX IF EXISTS IE_modulo;
+
+CREATE INDEX IE_modulo ON InsErogato(modulo);
+ANALYZE InsErogato;
 
 -- Risposta: si passa da 6315 accessi a 
 
@@ -155,7 +161,19 @@ WHERE I.nomeins ILIKE '%matematica%'
 
 -- Con indici
 
--- Risposta: si passa da 9860 accessi a
+DROP INDEX IF EXISTS CS_id;
+DROP INDEX IF EXISTS I_id;
+DROP INDEX IF EXISTS IE_id_insegn_cs;
+
+CREATE INDEX CS_id ON CorsoStudi(id);
+CREATE INDEX I_id ON Insegn(id);
+CREATE INDEX IE_id_insegn_cs ON InsErogato(id_insegn, id_corsostudi);
+
+ANALYZE CorsoStudi;
+ANALYZE Insegn;
+ANALYZE InsErogato;
+
+-- Risposta: si passa da 15271 accessi a 9860
 -- Indice inutilizzabile su ILIKE dato che il controllo è sulla parte centrale della stringa
 
 -- Esercizio 12
@@ -166,5 +184,12 @@ WHERE IE.modulo = 0
 GROUP BY IE.annoaccademico, CS.nome
 
 -- Con indice
+DROP INDEX IF EXISTS CS_id;
+DROP INDEX IF EXISTS IE_modulo;
+
+CREATE INDEX CS_id ON CorsoStudi(id);
+CREATE INDEX IE_modulo ON InsErogato(id_corsostudi, modulo);
+ANALYZE CorsoStudi;
+ANALYZE InsErogato;
 
 -- Risposta: si passa da 7408 accessi a 
