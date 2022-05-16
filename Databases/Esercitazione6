@@ -70,13 +70,14 @@ FROM Discriminante AS D JOIN InsErogato AS IE ON D.id = IE.id_discriminante JOIN
 WHERE IE.annoaccademico = '2009/2010' AND IE.crediti IN (3, 5, 12) AND IE.modulo <= 0
 
 -- Con indice
-CREATE INDEX IE_annoaccademico_modulo ON InsErogato(annoaccademico varchar_pattern_ops, modulo, id_insegn);
-CREATE INDEX IE_crediti ON InsErogato USING hash(crediti);
+CREATE INDEX IE_annoaccademico_modulo_crediti ON InsErogato(annoaccademico varchar_pattern_ops, modulo, crediti);
+CREATE INDEX I_id ON Insegn USING hash(id);
 ANALYZE InsErogato;
+ANALYZE Insegn;
 
--- Risposta: si passa da 6701 accessi a 1677
-DROP INDEX IF EXISTS IE_annoaccademico_modulo;
-DROP INDEX IF EXISTS IE_crediti;
+-- Risposta: si passa da 6701 accessi a 1527
+DROP INDEX IF EXISTS IE_annoaccademico_modulo_crediti;
+DROP INDEX IF EXISTS I_id;
 
 -- Esercizio 7
 EXPLAIN
@@ -107,23 +108,25 @@ ORDER BY I.nomeins, D.descrizione, IE.crediti, IE.annierogazione
 -- Con indice
 CREATE INDEX IE_annoaccademico_modulo ON InsErogato(annoaccademico varchar_pattern_ops, modulo);
 CREATE INDEX CS_id ON CorsoStudi(id);
-CREATE INDEX D_id ON Discriminante(id);
-CREATE INDEX I_id ON Insegn(id);
-CREATE INDEX CS_nome ON CorsoStudi (nome varchar_pattern_ops);
-CREATE INDEX IE_id_insegn_cs ON InsErogato(id_insegn, id_corsostudi);
+CREATE INDEX D_id ON Discriminante USING hash (id);
+CREATE INDEX I_id ON Insegn USING hash(id);
+CREATE INDEX CS_nome ON CorsoStudi(nome varchar_pattern_ops);
+CREATE INDEX IE_id_insegn ON InsErogato USING hash(id_insegn);
+CREATE INDEX IE_cs ON InsErogato USING hash(id_corsostudi);
 ANALYZE InsErogato;
 ANALYZE CorsoStudi;
 ANALYZE Discriminante;
-ANALYZE Insegn
+ANALYZE Insegn;
 
--- Risposta: si passa da 6494 accessi a 782
+-- Risposta: si passa da 6494 accessi a 65
 
 DROP INDEX IF EXISTS IE_annoaccademico_modulo;
 DROP INDEX IF EXISTS CS_nome;
 DROP INDEX IF EXISTS CS_id;
 DROP INDEX IF EXISTS D_id;
 DROP INDEX IF EXISTS I_id;
-DROP INDEX IF EXISTS IE_id_insegn_cs;
+DROP INDEX IF EXISTS IE_id_insegn;
+DROP INDEX IF EXISTS IE_cs;
 
 -- Esercizio 9
 EXPLAIN
@@ -169,17 +172,19 @@ WHERE I.nomeins ILIKE '%matematica%'
 
 DROP INDEX IF EXISTS CS_id;
 DROP INDEX IF EXISTS I_id;
-DROP INDEX IF EXISTS IE_id_insegn_cs;
+DROP INDEX IF EXISTS IE_id_insegn;
+DROP INDEX IF EXISTS IE_cs;
 
 CREATE INDEX CS_id ON CorsoStudi USING hash(id);
 CREATE INDEX I_id ON Insegn USING hash(id);
-CREATE INDEX IE_id_insegn_cs ON InsErogato(id_insegn, id_corsostudi);
+CREATE INDEX IE_id_insegn ON InsErogato USING hash(id_insegn);
+CREATE INDEX IE_cs ON InsErogato USING hash(id_corsostudi);
 
 ANALYZE CorsoStudi;
 ANALYZE Insegn;
 ANALYZE InsErogato;
 
--- Risposta: si passa da 15271 accessi a 9764
+-- Risposta: si passa da 15271 accessi a 9751
 -- Indice inutilizzabile su ILIKE dato che il controllo è sulla parte centrale della stringa
 
 -- Esercizio 12
@@ -191,12 +196,10 @@ GROUP BY IE.annoaccademico, CS.nome
 
 -- Con indice
 DROP INDEX IF EXISTS CS_id;
-DROP INDEX IF EXISTS IE_modulo;
 DROP INDEX IF EXISTS IE_CS;
 
-CREATE INDEX CS_id ON CorsoStudi USING hash(id);
-CREATE INDEX IE_CS ON InsErogato USING hash(id_corsostudi);
-CREATE INDEX IE_modulo ON InsErogato(modulo);
+CREATE INDEX CS_id ON CorsoStudi(id);
+CREATE INDEX IE_CS ON InsErogato(id, id_corsostudi, crediti);
 ANALYZE CorsoStudi;
 ANALYZE InsErogato;
 
