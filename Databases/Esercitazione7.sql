@@ -1,4 +1,5 @@
 -- Esercizio 1
+
 BEGIN;
 INSERT INTO public.museo(nome, città, indirizzo, numero_telefono, giorno_chiusura, prezzo) VALUES ('Museo', 'Verona', 'una', '0458003204', 'martedì', 20)
 COMMIT;
@@ -8,19 +9,17 @@ COMMIT;
 -- La seconda operazione verrà abortita
 
 -- Esercizio 2
+
+BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+SELECT * FROM Museo
+WHERE prezzo <> ceil ( prezzo ) AND citta ILIKE 'Verona';
+UPDATE Museo SET prezzo = round( prezzo * 1.10, 2 )
+WHERE prezzo <> ceil ( prezzo ) AND citta ILIKE 'Verona' ;
+COMMIT;
+
 BEGIN;
-
-SELECT nome, prezzo
-FROM museo
-WHERE RIGHT(prezzo::varchar, 2)::int <> 0;
-
-UPDATE public.museo
-SET prezzo = prezzo + (prezzo * 0.1)
-WHERE RIGHT(prezzo::varchar, 2)::int <> 0;
-
-UPDATE public.museo
-SET prezzo = prezzo + (prezzo * 0.1);
-
+UPDATE Museo SET prezzo = round ( prezzo * 1.10, 2 )
+WHERE citta ILIKE 'Verona';
 COMMIT;
 
 -- Livelli di isolamento
@@ -28,66 +27,48 @@ COMMIT;
 -- Repeatable Read: Garantisce che i dati letti durante la transazione non cambieranno a causa di altre transazioni: rifacendo la lettura dei medesimi dati, si ottengono sempre gli stessi.
 
 -- Esercizio 3
-BEGIN;
-INSERT INTO public.mostra (titolo, inizio, fine, museo, città, prezzoIntero, prezzoRidotto) VALUES ('Mostra4', '2022-01-01', '2022-01-09', 'Arena', 'Verona', 40, 20);
 
-SELECT AVG(prezzoIntero)
-FROM public.mostra;
+INSERT INTO Mostra( titolo, inizio, fine, museo, 
+ citta, prezzoIntero, prezzoRidotto ) 
+VALUES( 'Mostra Scaligera', '2017-02-12', '2017-11-30',
+ 'CastelVecchio', 'Verona', 40.00 , 20.00) ;
 
-SELECT AVG(prezzoRidotto)
-FROM public.mostra;
-
+BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+SELECT AVG ( prezzoIntero ) FROM Mostra WHERE citta ILIKE 'Verona';
+SELECT AVG ( prezzoRidotto ) FROM Mostra WHERE citta ILIKE 'Verona';
 COMMIT;
 
 -- Livello di isolamento
 -- Serializable: Garantisce che un’intera transazione è eseguita in un qualche ordine sequenziale rispetto ad altre transazioni: completo isolamento da transazioni concorrenti.
--- Repeatable Read: Garantisce che i dati letti durante la transazione non cambieranno a causa di altre transazioni: rifacendo la lettura dei medesimi dati, si ottengono sempre gli stessi.
 
 -- Esercizio 4
-BEGIN;
 
-UPDATE public.mostra
-SET prezzoIntero = prezzoIntero + (prezzoIntero * 0.1)
-WHERE città ILIKE 'verona';
+UPDATE Mostra SET prezzoIntero = round ( prezzoIntero * 1.10 , 2) 
+WHERE citta ILIKE 'Verona';
 
-UPDATE public.mostra
-SET prezzoRidotto = prezzoRidotto - (prezzoRidotto * 0.05);
-
-COMMIT;
+UPDATE Mostra SET prezzoRidotto = round ( prezzoRidotto * 0.95 , 2)
+WHERE citta ILIKE 'Verona';
 
 -- Livello di isolamento
 -- Lavorando su due colonne diverse non serve un livello di isolamento specifico
 
 -- Esercizio 5
-BEGIN;
 
-SELECT AVG(prezzo)
-FROM public.museo;
-WHERE città ILIKE 'vicenza';
+BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 
-INSERT INTO public.museo(nome, città, indirizzo, numero_telefono, giorno_chiusura, prezzo) VALUES ('Museo moderno’', 'Verona', 'una', '0458003204', 'martedì', (
-    SELECT AVG(prezzo)
-    FROM public.museo;
-    WHERE città ILIKE 'vicenza';
-))
+INSERT INTO Museo( nome, citta, prezzo ) 
+ SELECT 'Museo Preistorico di Verona', 'Verona', AVG( prezzo ) 
+ FROM Museo WHERE citta ILIKE 'Vicenza';
 
 COMMIT;
 
-BEGIN;
+BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 
-SELECT AVG(prezzo)
-FROM public.museo;
-WHERE città ILIKE 'verona';
-
-INSERT INTO public.museo(nome, città, indirizzo, numero_telefono, giorno_chiusura, prezzo) VALUES ('Museo vicentino', 'Vicenza', 'una', '0458003204', 'martedì', (
-    SELECT AVG(prezzo)
-    FROM public.museo;
-    WHERE città ILIKE 'verona';
-))
+INSERT INTO Musei( nome, citta, prezzo ) 
+SELECT 'Museo provinciale di Vicenza', 'Vicenza', AVG ( prezzo ) 
+FROM Musei WHERE citta ILIKE 'Verona';
 
 COMMIT;
 
 -- Livello di isolamento
 -- Serializable: Garantisce che un’intera transazione è eseguita in un qualche ordine sequenziale rispetto ad altre transazioni: completo isolamento da transazioni concorrenti.
--- Repeatable Read: Garantisce che i dati letti durante la transazione non cambieranno a causa di altre transazioni: rifacendo la lettura dei medesimi dati, si ottengono sempre gli stessi.
--- Read Committed: Garantisce che qualsiasi SELECT di una transazione vede solo i dati confermati (COMMITTED) prima che la SELECT inizi.
