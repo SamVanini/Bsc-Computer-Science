@@ -72,3 +72,22 @@ INSERT INTO public.museo(nome, città, indirizzo, numero_telefono, giorno_chiusu
 ))
 
 COMMIT;
+
+BEGIN;
+
+SELECT AVG(prezzo)
+FROM public.museo;
+WHERE città ILIKE 'verona';
+
+INSERT INTO public.museo(nome, città, indirizzo, numero_telefono, giorno_chiusura, prezzo) VALUES ('Museo vicentino', 'Vicenza', 'una', '0458003204', 'martedì', (
+    SELECT AVG(prezzo)
+    FROM public.museo;
+    WHERE città ILIKE 'verona';
+))
+
+COMMIT;
+
+-- Livello di isolamento
+-- Serializable: Garantisce che un’intera transazione è eseguita in un qualche ordine sequenziale rispetto ad altre transazioni: completo isolamento da transazioni concorrenti.
+-- Repeatable Read: Garantisce che i dati letti durante la transazione non cambieranno a causa di altre transazioni: rifacendo la lettura dei medesimi dati, si ottengono sempre gli stessi.
+-- Read Committed: Garantisce che qualsiasi SELECT di una transazione vede solo i dati confermati (COMMITTED) prima che la SELECT inizi.
